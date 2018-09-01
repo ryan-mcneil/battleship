@@ -1,13 +1,13 @@
 class Peg
-  attr_reader :ship, :state
+  attr_reader :is_ship, :state
 
   def initialize()
-    @ship = false
+    @is_ship = false
     @state = ""
   end
 
   def set_ship
-    @ship = true
+    @is_ship = true
   end
 
   def hit()

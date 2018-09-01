@@ -44,6 +44,14 @@ class BoardTest < Minitest::Test
     assert_instance_of Peg, board.grid["A"]["1"]
     assert_instance_of Peg, board.grid["D"]["4"]
   end
+
+  def test_it_can_set_peg_as_ship
+    board = Board.new()
+    board.build_board()
+    board.mark_peg_as_ship("A1")
+    assert board.grid["A"]["1"].is_ship
+    refute board.grid["B"]["3"].is_ship
+  end
 end
 
 # board = Board.new()
