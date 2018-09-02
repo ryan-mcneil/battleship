@@ -12,7 +12,7 @@ class PegTest < Minitest::Test
 
   def test_ship_initializes_to_false
     peg = Peg.new()
-    assert_equal false, peg.ship
+    assert_equal false, peg.is_ship
   end
 
   def test_state_starts_empty
@@ -23,7 +23,7 @@ class PegTest < Minitest::Test
   def test_it_can_become_a_ship
     peg = Peg.new()
     peg.set_ship
-    assert_equal true, peg.ship
+    assert_equal true, peg.is_ship
   end
 
   def test_it_can_be_hit
