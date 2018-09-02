@@ -71,6 +71,7 @@ class BoardTest < Minitest::Test
   def test_it_can_be_attacked
     board = Board.new
     board.build_board()
+    binding.pry
     board.add_ship(["A1", "A2"])
     board.attack("A1")
     assert_equal "HIT!", board.attack("A1")

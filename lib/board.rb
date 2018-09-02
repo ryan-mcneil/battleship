@@ -50,8 +50,18 @@ class Board
   end
 
   def display()
+    puts "=========="
+    puts ". 1 2 3 4 "
+    @grid.each.with_index do |row, index|
+      print @grid.keys[index]
 
+    end
+    return
   end
+
+  def display_states(row)
+
+  )
 
   def attack(coord)
     peg = @grid[coord[0]][coord[1]]
