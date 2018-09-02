@@ -1,11 +1,11 @@
 require "./lib/peg"
+require "pry"
 
 class Board
-  attr_reader :name, :grid
+  attr_reader :grid
 
 
-  def initialize(name)
-    @name = name
+  def initialize()
     @grid = Hash.new()
   end
 
@@ -49,7 +49,13 @@ class Board
     @grid[peg[0]][peg[1]].set_ship
   end
 
+  def display()
 
+  end
+
+  def attack(coord)
+
+  end
 
 
 
