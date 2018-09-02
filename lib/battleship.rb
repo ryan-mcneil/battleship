@@ -71,6 +71,6 @@ class Battleship
 
 
 end
-
-battleship = Battleship.new()
-battleship.intro
+# 
+# battleship = Battleship.new()
+# battleship.intro

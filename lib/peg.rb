@@ -3,7 +3,7 @@ class Peg
 
   def initialize()
     @is_ship = false
-    @state = ""
+    @state = " "
   end
 
   def set_ship

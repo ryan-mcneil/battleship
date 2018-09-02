@@ -6,12 +6,12 @@ require './lib/board'
 class BoardTest < Minitest::Test
 
   def test_it_exists
-    board = Board.new("")
+    board = Board.new
     assert_instance_of Board, board
   end
 
   def test_it_can_build_board
-    board = Board.new("")
+    board = Board.new
     expected = {"A" => {"1" => "", "2" => "", "3" => "", "4" => "" },
                 "B" => {"1" => "", "2" => "", "3" => "", "4" => "" },
                 "C" => {"1" => "", "2" => "", "3" => "", "4" => "" },
@@ -26,7 +26,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_build_a_row
-    board = Board.new("")
+    board = Board.new
     expected = {"1" => "", "2" => "", "3" => "", "4" => "" }
     row = board.build_row(String)
     assert_equal expected, row
@@ -37,7 +37,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_that_when_initialized_contents_are_pegs
-    board = Board.new("")
+    board = Board.new
     board.build_board()
     # now that we know we can create a board of strings, let's
     # test we can populate with Peg objects
@@ -46,7 +46,7 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_add_ship
-    board = Board.new("")
+    board = Board.new
     board.build_board()
     board.add_ship(["A1", "A2"])
     assert board.grid["A"]["1"].is_ship
@@ -61,12 +61,24 @@ class BoardTest < Minitest::Test
   end
 
   def test_it_can_set_peg_as_ship
-    board = Board.new("")
+    board = Board.new
     board.build_board()
     board.mark_peg_as_ship("A1")
     assert board.grid["A"]["1"].is_ship
     refute board.grid["B"]["3"].is_ship
   end
+
+  def test_it_can_be_attacked
+    board = Board.new
+    board.build_board()
+    board.add_ship(["A1", "A2"])
+    board.attack("A1")
+    assert_equal "HIT!", board.attack("A1")
+    assert_equal "H", board.grid["A"]["1"].state
+    assert_equal "MISS!", board.attack("B1")
+    assert_equal "M",  board.grid["B"]["1"].state
+  end
+
 
 
 end

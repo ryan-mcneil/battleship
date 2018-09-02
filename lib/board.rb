@@ -54,6 +54,12 @@ class Board
   end
 
   def attack(coord)
+    peg = @grid[coord[0]][coord[1]]
+    if peg.is_ship
+      peg.hit
+    else
+      peg.miss
+    end
 
   end
 
