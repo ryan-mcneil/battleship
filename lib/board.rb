@@ -53,15 +53,20 @@ class Board
     puts "=========="
     puts ". 1 2 3 4 "
     @grid.each.with_index do |row, index|
-      print @grid.keys[index]
-
+      print row[0] + " "
+      display_states(row[1])
     end
-    return
+    puts "=========="
   end
 
   def display_states(row)
+    row.values.each do |peg|
+      print peg.state + " "
+    end
+    print "\n"
+  end
 
-  )
+
 
   def attack(coord)
     peg = @grid[coord[0]][coord[1]]
