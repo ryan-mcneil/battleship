@@ -52,10 +52,11 @@ class Battleship
     puts "Here's a map of your enemy!"
     @comp.display
     print "Enter your attack!"
-    input = gets.chomp
+    input = gets.chomp.upcase
     comp.attack(input)
     @comp.display
     computer_turn()
+    binding.pry
     turn()
   end
 
@@ -71,6 +72,6 @@ class Battleship
 
 
 end
-# 
-# battleship = Battleship.new()
-# battleship.intro
+
+battleship = Battleship.new()
+battleship.intro

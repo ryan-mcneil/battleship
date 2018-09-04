@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'pry'
+require_relative 'test_helper'
 require './lib/peg'
 
 class PegTest < Minitest::Test
@@ -17,7 +15,7 @@ class PegTest < Minitest::Test
 
   def test_state_starts_empty
     peg = Peg.new()
-    assert_equal "", peg.state
+    assert_equal " ", peg.state
   end
 
   def test_it_can_become_a_ship

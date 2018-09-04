@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'minitest/pride'
-require 'pry'
+require_relative 'test_helper'
 require './lib/board'
 
 class BoardTest < Minitest::Test
@@ -79,10 +77,41 @@ class BoardTest < Minitest::Test
     assert_equal "M",  board.grid["B"]["1"].state
   end
 
+  def test_it_can_place_horizontally
+    board = Board.new
+    assert_equal ["D3", "D4"], board.place_horz("D3", 2)
+    assert_equal ["A1", "A2", "A3"], board.place_horz("A1", 3)
+  end
+
+  def test_it_can_place_vertically
+    board = Board.new
+    assert_equal ["C3", "D3"], board.place_vert("C3", 2)
+    assert_equal ["A1", "B1", "C1"], board.place_vert("A1", 3)
+  end
+
+  def test_it_randomly_picks_a_space_on_the_board
+    board = Board.new
+    grid_arr = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4",
+                "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+    assert grid_arr.include?(board.random_space)
+    assert grid_arr.include?(board.random_space)
+    assert grid_arr.include?(board.random_space)
+  end
+
+  def test_it_can_validate
+    board = Board.new
+    board.build_board()
+    assert board.validate(["E1"])
+
+  end
 
 
 end
 
 # board = Board.new()
-# board.build_board(String)
+# board.build_board
+# board.add_ship(["A1", "A2"])
+# board.attack("A1")
+# board.attack("D3")
+# board.display
 # binding.pry

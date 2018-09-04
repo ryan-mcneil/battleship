@@ -7,6 +7,9 @@ class Board
 
   def initialize()
     @grid = Hash.new()
+    @grid_arr = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4",
+                "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+
   end
 
   def build_board(class_type = Peg)
@@ -78,7 +81,46 @@ class Board
 
   end
 
+  def get_comp_ship(length)
+    start = random_space
+    if [0,1].sample == 1
+      place_vert(start,length)
+    else
+      place_horz(start,length)
+    end
+  end
 
+  def place_horz(start, length)
+    spaces = []
+    length.times do |i|
+      spaces[i] = start
+      # need a new string/object id otherwise every element will be the same
+      start = start.next
+    end
+    spaces
+  end
+
+  def place_vert(start, length)
+    spaces = []
+    length.times do |i|
+      spaces[i] = start
+      # need a new string/object id otherwise every element will be the same
+      start = start[0].next + start[1]
+    end
+    spaces
+  end
+
+  def random_space
+    @grid_arr.sample
+  end
+
+
+
+  def validate(coords)
+    coords.any? do |coord|
+      @grid_arr.include?(coord) || @grid[coord[0]][coord[1]] == nil
+    end
+  end
 
 
 end
