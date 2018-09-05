@@ -116,10 +116,15 @@ class Board
 
 
 
-  def validate(coords)
-    coords.any? do |coord|
-      @grid_arr.include?(coord) || @grid[coord[0]][coord[1]] == nil
-    end
+  def is_valid?(coords)
+    !(coords.any? do |coord|
+      binding.pry
+      if @grid_arr.include?(coord)
+        @grid[coord[0]][coord[1]].is_ship
+      else
+        false
+      end
+    end)
   end
 
 
