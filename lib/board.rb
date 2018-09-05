@@ -28,10 +28,10 @@ class Board
     return row
   end
 
-  def add_ship(pegs)
+  def add_ship(coords)
     #pegs = input_to_pegs(first, last, num)
-    pegs.each do |peg|
-      mark_peg_as_ship(peg)
+    coords.each do |coord|
+      mark_peg_as_ship(coord)
     end
   end
 
@@ -117,14 +117,11 @@ class Board
 
 
   def is_valid?(coords)
-    !(coords.any? do |coord|
-      binding.pry
+    coords.all? do |coord|
       if @grid_arr.include?(coord)
-        @grid[coord[0]][coord[1]].is_ship
-      else
-        false
+        !@grid[coord[0]][coord[1]].is_ship
       end
-    end)
+    end
   end
 
 

@@ -45,6 +45,9 @@ class Battleship
     print "Enter the squares for the three-unit ship:"
     input = gets.chomp.upcase.split(" ")
     @user.add_ship(input)
+    set_computer_ship(2)
+    set_computer_ship(3)
+    binding.pry
     turn()
   end
 
@@ -56,7 +59,6 @@ class Battleship
     comp.attack(input)
     @comp.display
     computer_turn()
-    binding.pry
     turn()
   end
 
@@ -64,8 +66,16 @@ class Battleship
 
   end
 
-
-
+  def set_computer_ship(length)
+    valid = false
+    until valid do
+      coords = @comp.get_comp_ship(length)
+      if @comp.is_valid?(coords)
+        @comp.add_ship(coords)
+        valid = true
+      end
+    end
+  end
 
 
 

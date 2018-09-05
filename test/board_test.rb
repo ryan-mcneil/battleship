@@ -101,10 +101,22 @@ class BoardTest < Minitest::Test
   def test_it_can_validate
     board = Board.new
     board.build_board()
-    # assert board.is_valid?(["A1"])
-    # board.mark_peg_as_ship("A1")
-    # refute board.is_valid?(["A1"])
+    assert board.is_valid?(["A1"])
+    board.mark_peg_as_ship("A1")
+    refute board.is_valid?(["A1"])
     refute board.is_valid?(["E1"])
+
+    assert board.is_valid?(["B1", "B2"])
+    board.mark_peg_as_ship("B2")
+    refute board.is_valid?(["B1", "B2"])
+    refute board.is_valid?(["E1", "A1"])
+
+    assert board.is_valid?(["C1", "C2", "C3"])
+    board.mark_peg_as_ship("C2")
+    refute board.is_valid?(["C1", "C2", "C3"])
+
+
+
 
   end
 
