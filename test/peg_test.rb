@@ -29,6 +29,7 @@ class PegTest < Minitest::Test
     assert_equal "HIT!", peg.hit
     assert_equal "H", peg.state
   end
+  
   def test_it_can_be_missed
     peg = Peg.new()
     assert_equal "MISS!", peg.miss

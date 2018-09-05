@@ -29,6 +29,7 @@ class Board
   end
 
   def add_ship(coords)
+
     #pegs = input_to_pegs(first, last, num)
     coords.each do |coord|
       mark_peg_as_ship(coord)
@@ -81,13 +82,29 @@ class Board
 
   end
 
-  def get_comp_ship(length)
+  def set_computer_ship(length)
+    valid = false
+    until valid do
+      coords = random_ship(length)
+      if is_valid?(coords)
+        add_ship(coords)
+        valid = true
+      end
+    end
+  end
+
+  def random_ship(length)
     start = random_space
     if [0,1].sample == 1
       place_vert(start,length)
     else
       place_horz(start,length)
     end
+  end
+
+
+  def random_space
+    @grid_arr.sample
   end
 
   def place_horz(start, length)
@@ -110,18 +127,28 @@ class Board
     spaces
   end
 
-  def random_space
-    @grid_arr.sample
-  end
-
-
-
   def is_valid?(coords)
     coords.all? do |coord|
       if @grid_arr.include?(coord)
         !@grid[coord[0]][coord[1]].is_ship
       end
     end
+  end
+
+  def is_in_board?(coord)
+    @grid_arr.include?(coord)
+  end
+
+  def random_fire
+    valid = false
+    until valid do
+      coord = random_space
+      # binding.pry
+      if @grid[coord[0]][coord[1]].state == " "
+        valid = true
+      end
+    end
+    coord
   end
 
 

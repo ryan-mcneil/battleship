@@ -114,10 +114,6 @@ class BoardTest < Minitest::Test
     assert board.is_valid?(["C1", "C2", "C3"])
     board.mark_peg_as_ship("C2")
     refute board.is_valid?(["C1", "C2", "C3"])
-
-
-
-
   end
 
 
