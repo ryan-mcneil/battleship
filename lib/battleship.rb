@@ -38,47 +38,49 @@ class Battleship
     puts "You now need to layout your two ships."
     puts "The first is two units long and the"
     puts "second is three units long."
-    puts "The grid has A1 at the top left and D4 at the bottom right./n/n"
-    print "Enter the squares for the two-unit ship:"
-    input = gets.chomp.upcase.split(" ")
-    @user.add_ship(input)
-    print "Enter the squares for the three-unit ship:"
-    input = gets.chomp.upcase.split(" ")
-    @user.add_ship(input)
-    set_computer_ship(2)
-    set_computer_ship(3)
-    binding.pry
+    puts "The grid has A1 at the top left and D4 at the bottom right."
+    get_input(2)
+    get_input(3)
+    @comp.set_computer_ship(2)
+    @comp.set_computer_ship(3)
     turn()
   end
 
   def turn()
-    puts "Here's a map of your enemy!"
+    puts "Here's your enemy's board! \n"
     @comp.display
-    print "Enter your attack!"
+    print "Enter your attack: "
     input = gets.chomp.upcase
-    comp.attack(input)
+    p comp.attack(input)
     @comp.display
+    puts "Press ENTER to end turn"
+    gets.chomp
     computer_turn()
     turn()
   end
 
-  def computer_turn()
-
-  end
-
-  def set_computer_ship(length)
+  def get_input(length)
+    nums = {2 => "two", 3 => "three"}
     valid = false
-    until valid do
-      coords = @comp.get_comp_ship(length)
-      if @comp.is_valid?(coords)
-        @comp.add_ship(coords)
-        valid = true
-      end
+    until valid
+      print "Enter the squares for the #{nums[length]}-unit ship: "
+      input = gets.chomp.upcase.split(" ")
+      # if @user.validate_input
+      @user.add_ship(input)
+      valid = true
     end
   end
 
+  def computer_turn()
+    coord = @user.random_fire
+    print "The computer attacks...\n\n"
+    p @user.attack(coord)
+    puts "Here is your board! \n"
+    @user.display
+    puts "Press ENTER to begin your turn"
+    gets.chomp
 
-
+  end
 
 
 end
