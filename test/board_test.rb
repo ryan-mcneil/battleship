@@ -8,6 +8,11 @@ class BoardTest < Minitest::Test
     assert_instance_of Board, board
   end
 
+  def test_it_begins_with_no_ships
+    board = Board.new
+    assert_equal [], board.ships
+  end
+
  # -- build_board --
 
   def test_it_can_build_board
@@ -51,6 +56,7 @@ class BoardTest < Minitest::Test
     board = Board.new
     board.build_board()
     board.add_ship(["A1", "A2"])
+    assert_equal 1, board.ships.count
     assert board.grid["A"]["1"].is_ship
     assert board.grid["A"]["2"].is_ship
     refute board.grid["A"]["4"].is_ship
@@ -60,6 +66,7 @@ class BoardTest < Minitest::Test
     assert board.grid["C"]["2"].is_ship
     assert board.grid["D"]["2"].is_ship
     refute board.grid["D"]["3"].is_ship
+    assert_equal 2, board.ships.count
   end
 
   def test_it_can_mark_peg_as_ship

@@ -3,7 +3,7 @@ require "./lib/ship"
 require "pry"
 
 class Board
-  attr_reader :grid
+  attr_reader :grid, :ships
 
 
   def initialize
@@ -35,24 +35,12 @@ class Board
   # -- add_ship --
 
   def add_ship(coords)
-
-    #pegs = input_to_pegs(first, last, num)
     ship = Ship.new(coords)
+    @ships << ship
     coords.each do |coord|
       mark_peg_as_ship(coord)
     end
   end
-
-  # def input_to_pegs(first, last, num)
-  #   pegs = []
-  #   if num == 2
-  #     pegs << first
-  #     pegs << last
-  #   pegs << first
-  #   if first[0]==last[0]
-  #     if first[1]<last[1]
-  # end
-
 
 
   def mark_peg_as_ship(peg)
@@ -62,18 +50,18 @@ class Board
 
    # -- attack --
 
-    def attack(coord)
-      peg = @grid[coord[0]][coord[1]]
-      if peg.is_ship
-        @ships.each do |ship|
-          ship.hit if ship.coords.include?(coord)
-        end
-        peg.hit
-      else
-        peg.miss
+  def attack(coord)
+    peg = @grid[coord[0]][coord[1]]
+    if peg.is_ship
+      @ships.each do |ship|
+        ship.hit if ship.coords.include?(coord)
       end
-
+      peg.hit
+    else
+      peg.miss
     end
+
+  end
 
   # -- display --
 
