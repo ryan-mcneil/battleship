@@ -1,4 +1,5 @@
 require "./lib/peg"
+require "./lib/ship"
 require "pry"
 
 class Board
@@ -9,6 +10,7 @@ class Board
     @grid = Hash.new
     @grid_arr = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4",
                 "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
+    @ships = []
 
   end
 
@@ -35,6 +37,7 @@ class Board
   def add_ship(coords)
 
     #pegs = input_to_pegs(first, last, num)
+    ship = Ship.new(coords)
     coords.each do |coord|
       mark_peg_as_ship(coord)
     end
@@ -62,6 +65,9 @@ class Board
     def attack(coord)
       peg = @grid[coord[0]][coord[1]]
       if peg.is_ship
+        @ships.each do |ship|
+          ship.hit if ship.coords.include?(coord)
+        end
         peg.hit
       else
         peg.miss
@@ -89,6 +95,7 @@ class Board
   end
 
   # -- set_computer_ship --
+
 
   def set_computer_ship(length)
     valid = false
