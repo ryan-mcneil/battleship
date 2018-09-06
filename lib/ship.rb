@@ -1,9 +1,10 @@
 class Ship
-  attr_reader :length, :hits
+  attr_reader :coords, :hits
 
-  def initialize(length)
-    @length = length
+  def initialize(coords)
+    @coords = coords
     @hits = 0
+
   end
 
   def hit
@@ -11,6 +12,6 @@ class Ship
   end
 
   def sunk?
-    @hits == length
+    @hits == coords.length
   end
 end
