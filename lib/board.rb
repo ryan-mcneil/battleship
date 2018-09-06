@@ -5,12 +5,14 @@ class Board
   attr_reader :grid
 
 
-  def initialize()
-    @grid = Hash.new()
+  def initialize
+    @grid = Hash.new
     @grid_arr = ["A1", "A2", "A3", "A4", "B1", "B2", "B3", "B4",
                 "C1", "C2", "C3", "C4", "D1", "D2", "D3", "D4"]
 
   end
+
+  # -- build_board --
 
   def build_board(class_type = Peg)
     row_syms = ["A", "B", "C", "D"]
@@ -21,12 +23,14 @@ class Board
 
 
   def build_row (class_type)
-    row = Hash.new()
+    row = Hash.new
     4.times do |col|
       row[(col+1).to_s] = class_type.new()
     end
     return row
   end
+
+  # -- add_ship --
 
   def add_ship(coords)
 
@@ -53,6 +57,20 @@ class Board
     @grid[peg[0]][peg[1]].set_ship
   end
 
+   # -- attack --
+
+    def attack(coord)
+      peg = @grid[coord[0]][coord[1]]
+      if peg.is_ship
+        peg.hit
+      else
+        peg.miss
+      end
+
+    end
+
+  # -- display --
+
   def display()
     puts "=========="
     puts ". 1 2 3 4 "
@@ -70,17 +88,7 @@ class Board
     print "\n"
   end
 
-
-
-  def attack(coord)
-    peg = @grid[coord[0]][coord[1]]
-    if peg.is_ship
-      peg.hit
-    else
-      peg.miss
-    end
-
-  end
+  # -- set_computer_ship --
 
   def set_computer_ship(length)
     valid = false
@@ -91,6 +99,8 @@ class Board
         valid = true
       end
     end
+    coords
+
   end
 
   def random_ship(length)
@@ -101,7 +111,6 @@ class Board
       place_horz(start,length)
     end
   end
-
 
   def random_space
     @grid_arr.sample
@@ -127,6 +136,22 @@ class Board
     spaces
   end
 
+  # -- random_fire
+
+   def random_fire
+     valid = false
+     until valid do
+       coord = random_space
+       # binding.pry
+       if @grid[coord[0]][coord[1]].state == " "
+         valid = true
+       end
+     end
+     coord
+   end
+
+ # -- validate --
+
   def is_valid?(coords)
     coords.all? do |coord|
       if @grid_arr.include?(coord)
@@ -135,21 +160,13 @@ class Board
     end
   end
 
-  def is_in_board?(coord)
-    @grid_arr.include?(coord)
-  end
+  # def is_in_board?(coord)
+  #   @grid_arr.include?(coord)
+  # end
 
-  def random_fire
-    valid = false
-    until valid do
-      coord = random_space
-      # binding.pry
-      if @grid[coord[0]][coord[1]].state == " "
-        valid = true
-      end
-    end
-    coord
-  end
+
+
+  private
 
 
 end
