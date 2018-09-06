@@ -23,7 +23,7 @@ class Battleship
     if input == "p" || input == "play"
       start
     elsif input == "i" || input == "instructions"
-      puts "this will be a README"
+      print_read_me
     elsif input == "q" || input == "quit"
       return
     else
@@ -114,6 +114,10 @@ class Battleship
     end
     p "that took too long!"
     exit
+  end
+
+  def print_read_me
+    "Enter 2 or 3 coords when requested, with a single space for example 'A1 A2 A3'"
   end
 
 
