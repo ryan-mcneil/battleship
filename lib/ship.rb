@@ -14,4 +14,5 @@ class Ship
   def sunk?
     @hits == coords.length
   end
+  
 end
